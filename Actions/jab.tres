@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Action" format=3 uid="uid://nb1q3v4lgg5h"]
+
+[ext_resource type="Script" uid="uid://d4b08o6ocqt3a" path="res://Scripts/action.gd" id="1_0e4ym"]
+[ext_resource type="Script" uid="uid://c7e1lgebbqhba" path="res://Scripts/reaction.gd" id="1_5jguc"]
+[ext_resource type="Resource" uid="uid://wae836ccnkq5" path="res://Reactions/dodge.tres" id="2_p3otw"]
+
+[resource]
+script = ExtResource("1_0e4ym")
+display_name = "Jab"
+description = "A fast strike at an opponent's head with low power but a high chance to hit"
+hp_damage = 8
+attack_bonus = 1
+child_reactions = Array[ExtResource("1_5jguc")]([ExtResource("2_p3otw")])
+metadata/_custom_type_script = "uid://d4b08o6ocqt3a"

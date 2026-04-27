@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Reaction" format=3 uid="uid://wae836ccnkq5"]
+
+[ext_resource type="Script" uid="uid://d4b08o6ocqt3a" path="res://Scripts/action.gd" id="1_of4tq"]
+[ext_resource type="Resource" uid="uid://nb1q3v4lgg5h" path="res://Actions/jab.tres" id="2_atuw3"]
+[ext_resource type="Script" uid="uid://c7e1lgebbqhba" path="res://Scripts/reaction.gd" id="2_jdq2n"]
+
+[resource]
+script = ExtResource("2_jdq2n")
+display_name = "Dodge"
+description = "Anticipate the attack and move away at the last second."
+attack_bonus = 1
+parent_actions = Array[ExtResource("1_of4tq")]([ExtResource("2_atuw3")])
+metadata/_custom_type_script = "uid://c7e1lgebbqhba"

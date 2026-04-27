@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://mxqovvc7ou02"]
+
+[ext_resource type="Script" uid="uid://b02eo6e0h5y45" path="res://Scripts/game_manager.gd" id="1_0e48y"]
+[ext_resource type="Script" uid="uid://d2g7t6klelkyk" path="res://Scripts/character.gd" id="2_epypp"]
+
+[node name="Main" type="Node2D" unique_id=1941334949]
+script = ExtResource("1_0e48y")
+
+[node name="Player Character" type="Node2D" parent="." unique_id=1230062778]
+script = ExtResource("2_epypp")
+
+[node name="AI_Character" type="Node2D" parent="." unique_id=1231225469]
+script = ExtResource("2_epypp")
