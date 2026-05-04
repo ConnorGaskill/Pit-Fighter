@@ -4,6 +4,8 @@ class_name Character
 
 signal OnTakeDamage (hp : int)
 
+@export var is_player : bool
+
 @export var max_hp : int
 
 @export var current_hp : int
@@ -16,7 +18,9 @@ signal OnTakeDamage (hp : int)
 
 @export var current_instinct : int 
 
-@export var actions : Array[Action]
+@export var known_actions : Array[Action]
+
+@export var known_reactions : Array[Reaction]
 
 #var known_reactions : Dictionary
 func begin_turn():
@@ -41,7 +45,7 @@ func use_reaction (reaction, opponent : Character, action):
 	pass
 	
 func roll_initiative():
-	return randf_range(0.5, 1.5)
+	return randf_range(0, 20)
 	
 
 # Called when the node enters the scene tree for the first time.

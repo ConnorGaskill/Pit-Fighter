@@ -8,24 +8,39 @@ var current_character : Character
 
 var acting_character : Character
 
+var reacting_character : Character
+
+var round_action : Action
+
+var round_reaction : Reaction
+
 var game_over : bool = false
 
-func start_combat ():
-	var pc_initiative = 0
-	var ai_initiative = 0
-	var highest_initiative
+func start_combat():
+	initiative_check()
+	action_phase()
 	
-	while (pc_initiative == ai_initiative) :
-		pc_initiative = player_character.roll_initiative()
-		ai_initiative = ai_character.roll_initiative()
-		if (pc_initiative > ai_initiative) :
-			highest_initiative = player_character
-		if (pc_initiative < ai_initiative) :
-			highest_initiative = ai_character
-			
-	acting_character = highest_initiative
+func action_phase ():
+	if current_character.is_player:
+		
+		pass
+		# enable and set player ui
+	else:
+		ai_decide_action()
+
+func reaction_phase ():
+	pass
 	
+func decide_action_or_reactoin_step():
+	pass
 	
+func process_action_step():
+	pass
+	
+func process_reaction_step():
+	pass
+	
+
 
 func next_turn ():
 	if game_over:
@@ -54,11 +69,16 @@ func next_turn ():
 		next_turn()
 		
 		
-func player_use_action (action):
-	if player_character != current_character:
-		return
-	player_character.use_action(action, ai_character)
-	# disable player ui
+		
+func use_action (action):
+	if player_character == current_character:
+		player_character.use_action(action, ai_character)
+		await get_tree().create_timer(0.5).timeout
+		# disable player ui
+	else:
+		# disable player ui
+		ai_character.use_action(ai_decide_action(), player_character)
+		await get_tree().create_timer(0.5).timeout
 	await get_tree().create_timer(0.5).timeout
 	next_turn()
 	
@@ -70,8 +90,27 @@ func player_use_reaction (action):
 	await get_tree().create_timer(0.5).timeout
 	next_turn()
 		
-func ai_decide_combat_action ():
-	pass
+func ai_decide_action () -> Action:
+	return null
+	
+func initiative_check():
+	var pc_initiative = 0
+	var ai_initiative = 0
+	var highest_initiative
+	var lowest_initiative
+	
+	while (pc_initiative == ai_initiative) :
+		pc_initiative = player_character.roll_initiative()
+		ai_initiative = ai_character.roll_initiative()
 		
+		if (pc_initiative > ai_initiative) :
+			highest_initiative = player_character
+			lowest_initiative = ai_character
 			
+		if (pc_initiative < ai_initiative) :
+			highest_initiative = ai_character
+			lowest_initiative = player_character
 			
+	acting_character = highest_initiative
+	reacting_character = lowest_initiative
+	

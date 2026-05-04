@@ -10,4 +10,4 @@ extends Resource
 
 @export var base_weight : int =100
 
-@export var child_reactions : Array[Reaction]
+@export var child_actions : Array[Reaction]
