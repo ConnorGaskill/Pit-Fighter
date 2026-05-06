@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Tag" format=3 uid="uid://cst8b6gtb6imf"]
+
+[ext_resource type="Script" uid="uid://dsn1htbwudik1" path="res://Scripts/Tag.gd" id="1_g8e7k"]
+
+[resource]
+script = ExtResource("1_g8e7k")
+label = "action"
+metadata/_custom_type_script = "uid://dsn1htbwudik1"

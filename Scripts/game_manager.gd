@@ -16,7 +16,26 @@ var round_reaction : Reaction
 
 var game_over : bool = false
 
-func start_combat():
+var active_phase : Phases = Phases.START
+
+var process_phase : bool = false
+
+func _physics_process(delta: float) -> void:
+	if !process_phase:
+		return
+
+enum Phases {
+	START,
+	ACTION,
+	REACTION,
+	RESULT,
+	COMPARE,
+	PROCESS,
+	END_STEP
+}
+
+func start() -> void:
+	process_phase = false
 	initiative_check()
 	action_phase()
 	

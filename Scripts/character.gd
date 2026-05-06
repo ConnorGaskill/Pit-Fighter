@@ -38,11 +38,6 @@ func lose_stamina (amount : int):
 func lose_instinct (amount : int):
 	pass
 	
-func use_action (action, opponent : Character):
-	pass
-	
-func use_reaction (reaction, opponent : Character, action):
-	pass
 	
 func roll_initiative():
 	return randf_range(0, 20)
