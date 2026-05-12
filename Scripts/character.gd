@@ -2,7 +2,7 @@ extends Node2D
 
 class_name Character
 
-signal OnTakeDamage (hp : int)
+signal hp_changed(current_hp:int, max_hp:int)
 
 @export var is_player : bool
 
@@ -23,13 +23,8 @@ signal OnTakeDamage (hp : int)
 @export var known_reactions : Array[Reaction]
 
 #var known_reactions : Dictionary
-func begin_turn():
-	pass
 
 func end_turn():
-	pass
-	
-func lose_hp (amount : int):
 	pass
 	
 func lose_stamina (amount : int):
@@ -45,9 +40,17 @@ func roll_initiative():
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	if is_player:
+		GameManager.player_character = self
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+	
+func change_hp(amount:int):
+
+	current_hp += amount
+	current_hp = clamp(current_hp, 0, max_hp)
+
+	hp_changed.emit(current_hp, max_hp)

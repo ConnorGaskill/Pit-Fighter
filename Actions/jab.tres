@@ -1,13 +1,28 @@
 [gd_resource type="Resource" script_class="Action" format=3 uid="uid://nb1q3v4lgg5h"]
 
-[ext_resource type="Script" uid="uid://c7e1lgebbqhba" path="res://Scripts/reaction.gd" id="1_0tdnc"]
 [ext_resource type="Script" uid="uid://d4b08o6ocqt3a" path="res://Scripts/action.gd" id="2_5jguc"]
-[ext_resource type="Resource" uid="uid://wae836ccnkq5" path="res://Reactions/dodge.tres" id="2_p3otw"]
 [ext_resource type="Script" uid="uid://dsn1htbwudik1" path="res://Scripts/Tag.gd" id="4_wn3v0"]
-[ext_resource type="Resource" uid="uid://btrkjgx70qe3h" path="res://Tags/damage.tres" id="5_6wn2w"]
+
+[sub_resource type="Resource" id="Resource_0tdnc"]
+script = ExtResource("4_wn3v0")
+qty = 5
+metadata/_custom_type_script = "uid://dsn1htbwudik1"
+
+[sub_resource type="Resource" id="Resource_5jguc"]
+script = ExtResource("4_wn3v0")
+label = "action"
+metadata/_custom_type_script = "uid://dsn1htbwudik1"
+
+[sub_resource type="Resource" id="Resource_p3otw"]
+script = ExtResource("4_wn3v0")
+label = "attack_bonus"
+qty = 1
+metadata/_custom_type_script = "uid://dsn1htbwudik1"
 
 [resource]
 script = ExtResource("2_5jguc")
-tags = Array[ExtResource("4_wn3v0")]([null, ExtResource("5_6wn2w")])
-child_reactions = Array[ExtResource("1_0tdnc")]([ExtResource("2_p3otw")])
+display_name = "Jab"
+description = "owi"
+tags = Array[ExtResource("4_wn3v0")]([SubResource("Resource_0tdnc"), SubResource("Resource_5jguc"), SubResource("Resource_p3otw")])
+related_moves = Array[String](["dodge"])
 metadata/_custom_type_script = "uid://d4b08o6ocqt3a"
