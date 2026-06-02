@@ -4,7 +4,7 @@ class_name Character
 
 signal hp_changed(current_hp:int, max_hp:int)
 
-@export var is_player : bool
+@export var is_player : bool = false
 
 @export var max_hp : int
 
@@ -22,7 +22,9 @@ signal hp_changed(current_hp:int, max_hp:int)
 
 @export var known_reactions : Array[Reaction]
 
-#var known_reactions : Dictionary
+@export var statuses : Dictionary[String, int]
+
+@export var character_name : String
 
 func end_turn():
 	pass
@@ -42,6 +44,8 @@ func roll_initiative():
 func _ready() -> void:
 	if is_player:
 		GameManager.player_character = self
+	else:
+		GameManager.ai_character = self
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

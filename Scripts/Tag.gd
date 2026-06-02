@@ -2,5 +2,10 @@ extends Resource
 
 class_name Tag
 
-@export var label : String = "damage"
+enum Tag_Type {
+	DAMAGE,
+	STUN
+}
+
+@export var label : Tag_Type
 @export var qty : int = 0

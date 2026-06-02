@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="Reaction" format=3 uid="uid://wae836ccnkq5"]
 
 [ext_resource type="Script" uid="uid://c7e1lgebbqhba" path="res://Scripts/reaction.gd" id="2_jdq2n"]
-[ext_resource type="Script" uid="uid://dsn1htbwudik1" path="res://Scripts/Tag.gd" id="2_of4tq"]
 
 [resource]
 script = ExtResource("2_jdq2n")
-related_moves = Array[String](["dodge", "uppercut"])
+name = "Dodge"
+related_moves = Array[String](["jab"])
 metadata/_custom_type_script = "uid://c7e1lgebbqhba"

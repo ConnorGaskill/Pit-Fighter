@@ -1,15 +1,14 @@
 extends Node2D
 
 signal update_action_buttons
-signal update_reaction_buttons()
+signal update_reaction_buttons(action)
 signal action_selected(action)
 signal reaction_selected(reaction)
+signal process_move(move, target)
 
-var player_character : Character
+@export var player_character : Character
 
-var ai_character : Character
-
-var current_character : Character
+@export var ai_character : Character
 
 var acting_character : Character
 
@@ -25,12 +24,17 @@ var active_phase : Phases = Phases.START
 
 var process_phase : bool = true
 
+var winner : Character
+
+var winning_move : Abstract_Combat_Move
+
+var target_character : Character
+
 enum Phases {
 	START,
 	ACTION,
 	REACTION,
 	COMPARE,
-	RESULT,
 	PROCESS,
 	END_STEP
 }
@@ -55,91 +59,112 @@ func _physics_process(delta: float) -> void:
 			
 
 func start() -> void:
-	process_phase = false
 	#initiative_check()
 	acting_character = player_character
-	#active_phase = Phases.ACTION
+	reacting_character = ai_character
+	active_phase = Phases.ACTION
 	
 func action_phase ():
+	process_phase = false
+	
 	if acting_character.is_player:
 		update_action_buttons.emit()
-		
 		round_action = await action_selected
 		
 	else:
 		ai_decide_action()
 		
+	process_phase = true
 	active_phase = Phases.REACTION
 
 func reaction_phase ():
-	if current_character.is_player:
-		update_reaction_buttons.emit()
+	process_phase = false
+	if reacting_character.is_player:
+		update_reaction_buttons.emit(round_action)
 		
 		round_reaction = await reaction_selected
 	else:
 		ai_decide_reaction()
 		
+	process_phase = true
 	active_phase = Phases.COMPARE
 	
 func decide_action_or_reaction_step():
-	var round_action_score : int
+	process_phase = false
+	var action_score : int
+	var reaction_score : int
 	
+	action_score = randi_range(1, 20)
 	
+	reaction_score = randi_range(1, 20)
+	
+	if action_score >= reaction_score:
+		winning_move = round_action
+		target_character = reacting_character
+		
+	else:
+		winning_move = round_reaction
+		target_character = acting_character
+		
+	print("Thing winning move is: " + winning_move.name)
+	
+	process_phase = true
+	active_phase = Phases.PROCESS
 	
 func process_step():
-	pass
+	process_phase = false
+	process_move.emit(winning_move, target_character)
+	process_phase = true
+	active_phase = Phases.END_STEP
 	
 func end_step():
+	
+	process_phase = false
+	
+	if player_character.current_hp <= 0 and ai_character.current_hp <=0:
+		game_over = true
+	elif player_character.current_hp <= 0:
+		game_over = true
+		winner = ai_character
+	elif ai_character.current_hp <= 0:
+		game_over = true
+		winner = player_character
+		
+	round_action = null
+	round_reaction = null
+	winning_move = null
+	target_character = null
+	
 	if game_over:
+		if winner != null:
+			print(winner.character_name + " has won!")
+			
+		else:
+			print("It was a tie")
+			
+		process_phase = false
 		return
-		
-	if current_character != null:
-		current_character.end_turn()
-		
-	if current_character == ai_character or current_character == null:
-		current_character = player_character
-		
 	else:
-		current_character = ai_character
-	current_character.begin_turn()
-	
-	if current_character.is_player:
-		pass
-		# enable and set ui
 		
-	else:
-		#disable player ui
-		var wait_time = randf_range(0.5, 1.5)
-		await get_tree().create_timer(wait_time).timeout
-		# cast combat action
-		await get_tree().create_timer(0.5).timeout
-		#next_turn()
-		
-#func use_action (action):
-	#if player_character == current_character:
-		#player_character.use_action(action, ai_character)
-		#await get_tree().create_timer(0.5).timeout
-		## disable player ui
-	#else:
-		## disable player ui
-		#ai_character.use_action(ai_decide_action(), player_character)
-		#await get_tree().create_timer(0.5).timeout
-	#await get_tree().create_timer(0.5).timeout
-	#next_turn()
+		var coin_flip : int = randi_range(1,2)
 	
-func player_use_reaction (action):
-	if player_character != current_character:
-		return
-	player_character.use_action(action, ai_character)
-	# disable player ui
-	await get_tree().create_timer(0.5).timeout
-	#next_turn()
+		if coin_flip == 1:
+			acting_character = player_character
+			reacting_character = ai_character
+		else:
+			acting_character = ai_character
+			reacting_character = player_character
+		
+		process_phase = true
+		active_phase = Phases.ACTION
 		
 func ai_decide_action ():
-	pass
+	round_action = ai_character.known_actions[0]
+	print(round_action)
 	
 func ai_decide_reaction ():
-	pass
+	round_reaction = ai_character.known_reactions[0]
+	print(round_reaction.name)
 	
 func initiative_check():
 	var pc_initiative = 0

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dsn1htbwudik1" path="res://Scripts/Tag.gd" id="1_yc1gs"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_yc1gs")
-qty = 5
+qty = 8
 metadata/_custom_type_script = "uid://dsn1htbwudik1"
