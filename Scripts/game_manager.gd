@@ -60,8 +60,8 @@ func _physics_process(delta: float) -> void:
 
 func start() -> void:
 	#initiative_check()
-	acting_character = player_character
-	reacting_character = ai_character
+	acting_character = ai_character
+	reacting_character = player_character
 	active_phase = Phases.ACTION
 	
 func action_phase ():
@@ -106,7 +106,7 @@ func decide_action_or_reaction_step():
 		winning_move = round_reaction
 		target_character = acting_character
 		
-	print("Thing winning move is: " + winning_move.name)
+	print("The winning move is: " + winning_move.name)
 	
 	process_phase = true
 	active_phase = Phases.PROCESS

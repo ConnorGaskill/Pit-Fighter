@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("2_jdq2n")
-name = "Dodge"
+name = "dodge"
 related_moves = Array[String](["jab"])
 metadata/_custom_type_script = "uid://c7e1lgebbqhba"

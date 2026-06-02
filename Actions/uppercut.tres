@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_0il3t")
-name = "Uppercut"
+name = "uppercut"
 related_moves = Array[String](["dodge"])
 tags = Dictionary[String, int]({
 "damage": 8

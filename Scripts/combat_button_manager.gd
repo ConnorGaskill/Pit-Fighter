@@ -38,13 +38,14 @@ func show_reaction_buttons(action : Action) -> void:
 			if rm == kr.name:
 				var button := Button.new()
 
-				button.text = kr.move_name
+				button.text = kr.name
 
 				button_container.add_child(button)
 
 				button.pressed.connect(
 				func():
 					clear_buttons()
+					print("Reaction selected: ", kr.name)		
 					GameManager.reaction_selected.emit(kr))
 				break
 		
