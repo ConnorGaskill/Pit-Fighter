@@ -8,7 +8,7 @@ func apply_move(move : Abstract_Combat_Move, target : Character) -> void:
 	print("Processed move: " + move.name)
 	var damage_on_stack : int = 0
 	
-	# process and apply tags to stack
+	# apply tags to stack
 
 	if move.tags.has("damage"):
 		damage_on_stack = move.tags["damage"]
