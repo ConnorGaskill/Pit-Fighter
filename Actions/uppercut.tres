@@ -1,12 +1,14 @@
 [gd_resource type="Resource" script_class="Action" format=3 uid="uid://b4k1sa6l5l7go"]
 
-[ext_resource type="Script" uid="uid://d4b08o6ocqt3a" path="res://Scripts/action.gd" id="1_0il3t"]
+[ext_resource type="Script" uid="uid://c7e1lgebbqhba" path="res://Scripts/reaction.gd" id="1_j3r50"]
+[ext_resource type="Resource" uid="uid://wae836ccnkq5" path="res://Reactions/dodge.tres" id="2_4haub"]
+[ext_resource type="Script" uid="uid://d4b08o6ocqt3a" path="res://Scripts/action.gd" id="2_ojmbg"]
 
 [resource]
-script = ExtResource("1_0il3t")
-name = "uppercut"
-related_moves = Array[String](["dodge"])
-tags = Dictionary[String, int]({
-"damage": 8
+script = ExtResource("2_ojmbg")
+related_moves = Array[ExtResource("1_j3r50")]([ExtResource("2_4haub")])
+name = "Uppercut"
+tags = Dictionary[int, int]({
+0: 4
 })
 metadata/_custom_type_script = "uid://d4b08o6ocqt3a"

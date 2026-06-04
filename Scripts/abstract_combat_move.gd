@@ -7,8 +7,6 @@ extends Resource
 
 @export var description : String
 
-@export var related_moves : Array[String]
+@export var valid_positions : Dictionary[PositionManager.Position, int]
 
-#@export var tags : Dictionary[TagType.Type, int]
-
-@export var tags : Dictionary[String, int]
+@export var tags : Dictionary[Enums.TagType, int]

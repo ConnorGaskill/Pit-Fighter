@@ -1,5 +1,6 @@
 extends Node
 
+class_name Position_Manager
 
 enum Position {
 	STANDING,
@@ -12,13 +13,20 @@ var a : Character
 
 var b : Character
 
-var current_position : Position
+static var _current_position : Position
+
+static var current_position : Position : 
+	get: 
+		return _current_position
+
+func _ready() -> void:
+	GameManager.set_position.connect(set_position)
 
 func set_position (a : Character, b : Character, position : Position):
-	if Position.STANDING:
-		a = null
-		b = null
-	if Position.ARM_BAR or Position.FRONT_MOUNT:
-		a = a
-		b = b
-	current_position = position
+	if position == Position.STANDING or position == Position.TIE:
+		self.a = null
+		self.b = null
+	if position == Position.ARM_BAR or position == Position.FRONT_MOUNT:
+		self.a = a
+		self.b = b
+	_current_position = position

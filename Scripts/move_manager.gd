@@ -10,11 +10,11 @@ func apply_move(move : Abstract_Combat_Move, target : Character) -> void:
 	
 	# apply tags to stack
 
-	if move.tags.has("damage"):
-		damage_on_stack = move.tags["damage"]
+	if move.tags.has(Enums.TagType.DAMAGE):
+		damage_on_stack = move.tags[Enums.TagType.DAMAGE]
 
-	if move.tags.has("stun"):
-		target.add_status("stun", move.tags["stun"])
+	if move.tags.has(Enums.TagType.STUN):
+		target.add_status(Enums.TagType.STUN, move.tags[Enums.TagType.STUN])
 		
 	# process effects on stack
 		

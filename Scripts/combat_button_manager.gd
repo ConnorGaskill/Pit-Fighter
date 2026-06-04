@@ -11,6 +11,7 @@ func _ready() -> void:
 
 	GameManager.update_reaction_buttons.connect(show_reaction_buttons)
 	
+	
 func show_action_buttons() -> void:
 
 	clear_buttons()
@@ -35,7 +36,7 @@ func show_reaction_buttons(action : Action) -> void:
 	
 	for rm in action.related_moves:
 		for kr in GameManager.player_character.known_reactions:
-			if rm == kr.name:
+			if rm.name == kr.name:
 				var button := Button.new()
 
 				button.text = kr.name

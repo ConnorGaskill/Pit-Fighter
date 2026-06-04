@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://b02eo6e0h5y45" path="res://Scripts/game_manager.gd" id="1_0e48y"]
 [ext_resource type="Script" uid="uid://d2g7t6klelkyk" path="res://Scripts/character.gd" id="2_epypp"]
-[ext_resource type="Script" uid="uid://d4b08o6ocqt3a" path="res://Scripts/action.gd" id="3_d21ai"]
-[ext_resource type="Resource" uid="uid://nb1q3v4lgg5h" path="res://Actions/jab.tres" id="4_rj586"]
-[ext_resource type="Script" uid="uid://c7e1lgebbqhba" path="res://Scripts/reaction.gd" id="5_4d7sh"]
-[ext_resource type="Resource" uid="uid://b4k1sa6l5l7go" path="res://Actions/uppercut.tres" id="5_ir8iy"]
-[ext_resource type="Resource" uid="uid://wae836ccnkq5" path="res://Reactions/dodge.tres" id="6_ir8iy"]
+[ext_resource type="Script" uid="uid://d4b08o6ocqt3a" path="res://Scripts/action.gd" id="3_rj586"]
+[ext_resource type="Resource" uid="uid://nb1q3v4lgg5h" path="res://Actions/jab.tres" id="4_4d7sh"]
+[ext_resource type="Resource" uid="uid://b4k1sa6l5l7go" path="res://Actions/uppercut.tres" id="5_4d7sh"]
+[ext_resource type="Script" uid="uid://c7e1lgebbqhba" path="res://Scripts/reaction.gd" id="5_ir8iy"]
+[ext_resource type="Resource" uid="uid://wae836ccnkq5" path="res://Reactions/dodge.tres" id="6_hqns4"]
 [ext_resource type="Script" uid="uid://hhpw7p8ntyal" path="res://Scripts/health_bar.gd" id="7_d21ai"]
 [ext_resource type="Script" uid="uid://de2yca7okpue5" path="res://Scripts/combat_button_manager.gd" id="7_rj586"]
 
@@ -20,6 +20,43 @@ gradient = SubResource("Gradient_epypp")
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_epypp"]
 gradient = SubResource("Gradient_epypp")
 
+[sub_resource type="Animation" id="Animation_4d7sh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player Character/Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ir8iy"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player Character/Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.95, 1.05), Vector2(1.05, 0.95), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hqns4"]
+_data = {
+&"RESET": SubResource("Animation_4d7sh"),
+&"idle": SubResource("Animation_ir8iy")
+}
+
 [node name="Main" type="Node2D" unique_id=1941334949 node_paths=PackedStringArray("player_character", "ai_character")]
 script = ExtResource("1_0e48y")
 player_character = NodePath("Player Character")
@@ -31,20 +68,21 @@ script = ExtResource("2_epypp")
 is_player = true
 max_hp = 10
 current_hp = 10
-known_actions = Array[ExtResource("3_d21ai")]([ExtResource("4_rj586"), ExtResource("5_ir8iy")])
-known_reactions = Array[ExtResource("5_4d7sh")]([ExtResource("6_ir8iy")])
+known_actions = Array[ExtResource("3_rj586")]([ExtResource("4_4d7sh"), ExtResource("5_4d7sh")])
+known_reactions = Array[ExtResource("5_ir8iy")]([ExtResource("6_hqns4")])
 character_name = "Player"
 
 [node name="Sprite2D" type="Sprite2D" parent="Player Character" unique_id=938433781]
 position = Vector2(982, 358)
 texture = SubResource("GradientTexture2D_0hol4")
+offset = Vector2(0, -32)
 
 [node name="AI_Character" type="Node2D" parent="." unique_id=1231225469]
 script = ExtResource("2_epypp")
 max_hp = 10
 current_hp = 10
-known_actions = Array[ExtResource("3_d21ai")]([ExtResource("4_rj586")])
-known_reactions = Array[ExtResource("5_4d7sh")]([ExtResource("6_ir8iy")])
+known_actions = Array[ExtResource("3_rj586")]([ExtResource("4_4d7sh"), ExtResource("5_4d7sh")])
+known_reactions = Array[ExtResource("5_ir8iy")]([ExtResource("6_hqns4")])
 character_name = "Bozo"
 
 [node name="Sprite2D2" type="Sprite2D" parent="AI_Character" unique_id=2098353783]
@@ -89,3 +127,17 @@ offset_bottom = 296.0
 script = ExtResource("7_d21ai")
 character = NodePath("../../../AI_Character")
 metadata/_custom_type_script = "uid://hhpw7p8ntyal"
+
+[node name="Log" type="ScrollContainer" parent="CanvasLayer/Control" unique_id=436569734]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 424.0
+offset_right = 168.0
+offset_bottom = 447.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/Log" unique_id=277231271]
+layout_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1937888393]
+libraries/ = SubResource("AnimationLibrary_hqns4")
+autoplay = &"idle"

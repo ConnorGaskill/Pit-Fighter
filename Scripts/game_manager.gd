@@ -5,6 +5,7 @@ signal update_reaction_buttons(action)
 signal action_selected(action)
 signal reaction_selected(reaction)
 signal process_move(move, target)
+signal set_position(a, b, position)
 
 @export var player_character : Character
 
@@ -60,6 +61,7 @@ func _physics_process(delta: float) -> void:
 
 func start() -> void:
 	#initiative_check()
+	set_position.emit(ai_character, player_character, Position_Manager.Position.STANDING)
 	acting_character = ai_character
 	reacting_character = player_character
 	active_phase = Phases.ACTION
