@@ -4,7 +4,7 @@ signal update_action_buttons
 signal update_reaction_buttons(action)
 signal action_selected(action)
 signal reaction_selected(reaction)
-signal process_move(move, target)
+signal process_move(source_character, target_character, winning_move)
 signal set_position(a, b, position)
 
 @export var player_character : Character
@@ -30,6 +30,8 @@ var winner : Character
 var winning_move : Abstract_Combat_Move
 
 var target_character : Character
+
+var source_character : Character
 
 enum Phases {
 	START,
@@ -67,6 +69,7 @@ func start() -> void:
 	active_phase = Phases.ACTION
 	
 func action_phase ():
+	print("Current stamina", player_character.current_stamina)
 	process_phase = false
 	
 	if acting_character.is_player:
@@ -103,10 +106,12 @@ func decide_action_or_reaction_step():
 	if action_score >= reaction_score:
 		winning_move = round_action
 		target_character = reacting_character
+		source_character = acting_character
 		
 	else:
 		winning_move = round_reaction
 		target_character = acting_character
+		source_character = reacting_character
 		
 	print("The winning move is: " + winning_move.name)
 	
@@ -115,7 +120,7 @@ func decide_action_or_reaction_step():
 	
 func process_step():
 	process_phase = false
-	process_move.emit(winning_move, target_character)
+	process_move.emit(source_character, target_character, winning_move)
 	process_phase = true
 	active_phase = Phases.END_STEP
 	

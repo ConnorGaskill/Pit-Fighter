@@ -3,7 +3,8 @@ class_name Enums
 enum TagType {
 	DAMAGE,
 	STUN,
-	BLEED
+	BLEED,
+	STAMINA_COST
 }
 
 enum RelatedMove {

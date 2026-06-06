@@ -23,6 +23,12 @@ func show_action_buttons() -> void:
 		button.text = action.name
 
 		button_container.add_child(button)
+		
+		if action.tags.has(Enums.TagType.STAMINA_COST):
+			print("Required stamina: ", action.tags[Enums.TagType.STAMINA_COST])
+			print("Current stamina: ", GameManager.player_character.current_stamina)
+			if action.tags[Enums.TagType.STAMINA_COST] > GameManager.player_character.current_stamina:
+				button.disabled = true
 
 		button.pressed.connect(
 			func():
@@ -42,6 +48,10 @@ func show_reaction_buttons(action : Action) -> void:
 				button.text = kr.name
 
 				button_container.add_child(button)
+				
+				if (kr.tags.has(Enums.TagType.STAMINA_COST)):
+					if kr.tags[Enums.TagType.STAMINA_COST] > GameManager.player_character.current_stamina:
+						button.disabled = true
 
 				button.pressed.connect(
 				func():

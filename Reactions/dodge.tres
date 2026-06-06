@@ -2,11 +2,9 @@
 
 [ext_resource type="Script" uid="uid://c7e1lgebbqhba" path="res://Scripts/reaction.gd" id="1_7bhht"]
 [ext_resource type="Script" uid="uid://d4b08o6ocqt3a" path="res://Scripts/action.gd" id="1_jdq2n"]
-[ext_resource type="Resource" uid="uid://nb1q3v4lgg5h" path="res://Actions/jab.tres" id="2_atuw3"]
 
 [resource]
 script = ExtResource("1_7bhht")
-related_moves = Array[ExtResource("1_jdq2n")]([ExtResource("2_atuw3")])
 name = "Dodge"
 valid_positions = Dictionary[int, int]({
 0: 3

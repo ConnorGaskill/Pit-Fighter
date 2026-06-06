@@ -2,19 +2,11 @@
 
 [ext_resource type="Script" uid="uid://d4b08o6ocqt3a" path="res://Scripts/action.gd" id="1_0e4ym"]
 [ext_resource type="Script" uid="uid://c7e1lgebbqhba" path="res://Scripts/reaction.gd" id="1_5jguc"]
-
-[sub_resource type="Resource" id="Resource_0tdnc"]
-script = ExtResource("1_5jguc")
-related_moves = Array[ExtResource("1_0e4ym")]([null])
-name = "Dodge"
-valid_positions = Dictionary[int, int]({
-0: 3
-})
-metadata/_custom_type_script = "uid://c7e1lgebbqhba"
+[ext_resource type="Resource" uid="uid://wae836ccnkq5" path="res://Reactions/dodge.tres" id="2_p3otw"]
 
 [resource]
 script = ExtResource("1_0e4ym")
-related_moves = Array[ExtResource("1_5jguc")]([SubResource("Resource_0tdnc")])
+related_moves = Array[ExtResource("1_5jguc")]([ExtResource("2_p3otw")])
 name = "Jab"
 valid_positions = Dictionary[int, int]({
 0: 3

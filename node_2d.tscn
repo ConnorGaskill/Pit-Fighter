@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://wae836ccnkq5" path="res://Reactions/dodge.tres" id="6_hqns4"]
 [ext_resource type="Script" uid="uid://hhpw7p8ntyal" path="res://Scripts/health_bar.gd" id="7_d21ai"]
 [ext_resource type="Script" uid="uid://de2yca7okpue5" path="res://Scripts/combat_button_manager.gd" id="7_rj586"]
+[ext_resource type="Script" uid="uid://brs6q2jbkh46l" path="res://Scripts/stamina_bar.gd" id="10_ir8iy"]
 
 [sub_resource type="Gradient" id="Gradient_epypp"]
 offsets = PackedFloat32Array(0.44, 1)
@@ -68,12 +69,14 @@ script = ExtResource("2_epypp")
 is_player = true
 max_hp = 10
 current_hp = 10
+max_stamina = 10
+current_stamina = 10
 known_actions = Array[ExtResource("3_rj586")]([ExtResource("4_4d7sh"), ExtResource("5_4d7sh")])
 known_reactions = Array[ExtResource("5_ir8iy")]([ExtResource("6_hqns4")])
 character_name = "Player"
 
 [node name="Sprite2D" type="Sprite2D" parent="Player Character" unique_id=938433781]
-position = Vector2(982, 358)
+position = Vector2(133, 358)
 texture = SubResource("GradientTexture2D_0hol4")
 offset = Vector2(0, -32)
 
@@ -86,8 +89,9 @@ known_reactions = Array[ExtResource("5_ir8iy")]([ExtResource("6_hqns4")])
 character_name = "Bozo"
 
 [node name="Sprite2D2" type="Sprite2D" parent="AI_Character" unique_id=2098353783]
-position = Vector2(112, 358)
+position = Vector2(805, 358)
 texture = SubResource("GradientTexture2D_epypp")
+offset = Vector2(0, -32)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1319885309]
 
@@ -110,23 +114,43 @@ script = ExtResource("7_rj586")
 
 [node name="Player Health" type="ProgressBar" parent="CanvasLayer/Control" unique_id=380910751 node_paths=PackedStringArray("character")]
 layout_mode = 0
-offset_left = 68.0
-offset_top = 277.0
-offset_right = 160.0
-offset_bottom = 304.0
+offset_left = 65.0
+offset_top = 217.0
+offset_right = 157.0
+offset_bottom = 244.0
 script = ExtResource("7_d21ai")
 character = NodePath("../../../Player Character")
 metadata/_custom_type_script = "uid://hhpw7p8ntyal"
 
+[node name="Player Stamina" type="ProgressBar" parent="CanvasLayer/Control" unique_id=1648782265 node_paths=PackedStringArray("character")]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 250.0
+offset_right = 157.0
+offset_bottom = 277.0
+script = ExtResource("10_ir8iy")
+character = NodePath("../../../Player Character")
+metadata/_custom_type_script = "uid://brs6q2jbkh46l"
+
 [node name="AI Health" type="ProgressBar" parent="CanvasLayer/Control" unique_id=457136946 node_paths=PackedStringArray("character")]
 layout_mode = 0
-offset_left = 915.0
-offset_top = 269.0
-offset_right = 1018.0
-offset_bottom = 296.0
+offset_left = 757.0
+offset_top = 214.0
+offset_right = 860.0
+offset_bottom = 241.0
 script = ExtResource("7_d21ai")
 character = NodePath("../../../AI_Character")
 metadata/_custom_type_script = "uid://hhpw7p8ntyal"
+
+[node name="AI Stamina" type="ProgressBar" parent="CanvasLayer/Control" unique_id=638006152 node_paths=PackedStringArray("character")]
+layout_mode = 0
+offset_left = 757.0
+offset_top = 252.0
+offset_right = 857.0
+offset_bottom = 279.0
+script = ExtResource("10_ir8iy")
+character = NodePath("../../../AI_Character")
+metadata/_custom_type_script = "uid://brs6q2jbkh46l"
 
 [node name="Log" type="ScrollContainer" parent="CanvasLayer/Control" unique_id=436569734]
 layout_mode = 0

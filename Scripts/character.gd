@@ -3,6 +3,7 @@ extends Node2D
 class_name Character
 
 signal hp_changed(current_hp:int, max_hp:int)
+signal stamina_changed(current_stamina : int, max_stamina : int)
 
 @export var is_player : bool = false
 
@@ -29,9 +30,6 @@ signal hp_changed(current_hp:int, max_hp:int)
 func end_turn():
 	pass
 	
-func lose_stamina (amount : int):
-	pass
-	
 func lose_instinct (amount : int):
 	pass
 	
@@ -52,6 +50,13 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 	
+func change_stamina(amount : int):
+	
+	current_stamina += amount
+	current_stamina = clamp(current_stamina, 0, max_stamina)
+	
+	stamina_changed.emit(current_stamina, max_stamina)
+
 func change_hp(amount:int):
 
 	current_hp += amount
