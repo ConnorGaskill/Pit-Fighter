@@ -2,7 +2,7 @@ extends ProgressBar
 
 class_name StaminaBar
 
-@export var character : Character
+@export var character : Abstract_Character
 
 
 func _ready() -> void:

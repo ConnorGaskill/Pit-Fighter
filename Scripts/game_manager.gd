@@ -1,19 +1,15 @@
-extends Node2D
+class_name GameManager extends Node2D
 
-signal update_action_buttons
-signal update_reaction_buttons(action)
-signal action_selected(action)
-signal reaction_selected(reaction)
-signal process_move(source_character, target_character, winning_move)
-signal set_position(a, b, position)
+signal process_move(source_character : Abstract_Character, target_character : Abstract_Character, 
+winning_move : Abstract_Combat_Move)
 
-@export var player_character : Character
+@onready var player_1 : Abstract_Character = %Player_1
 
-@export var ai_character : Character
+@onready var player_2 : Abstract_Character = %Player_2
 
-var acting_character : Character
+var acting_character : Abstract_Character
 
-var reacting_character : Character
+var reacting_character : Abstract_Character
 
 var round_action : Action
 
@@ -25,22 +21,29 @@ var active_phase : Phases = Phases.START
 
 var process_phase : bool = true
 
-var winner : Character
+var winner : Abstract_Character
 
 var winning_move : Abstract_Combat_Move
 
-var target_character : Character
+var target_character : Abstract_Character
 
-var source_character : Character
+var source_character : Abstract_Character
+
+static var Instance : GameManager
 
 enum Phases {
 	START,
 	ACTION,
 	REACTION,
+	PLAYER_1_INPUT,
+	PLAYER_2_INPUT,
 	COMPARE,
 	PROCESS,
 	END_STEP
 }
+
+func _init() -> void:
+	Instance = self
 
 func _physics_process(delta: float) -> void:
 	if !process_phase:
@@ -53,6 +56,10 @@ func _physics_process(delta: float) -> void:
 			action_phase()
 		Phases.REACTION:
 			reaction_phase()
+		Phases.PLAYER_1_INPUT:
+			pass # show_player_1_buttons(Phases.ACTION || Phases.REACTION)
+		Phases.PLAYER_2_INPUT:
+			pass # show_player_2_buttons(Phases.ACTION || Phases.REACTION)
 		Phases.COMPARE:
 			decide_action_or_reaction_step()
 		Phases.PROCESS:
@@ -62,39 +69,29 @@ func _physics_process(delta: float) -> void:
 			
 
 func start() -> void:
-	#initiative_check()
-	set_position.emit(ai_character, player_character, Position_Manager.Position.STANDING)
-	acting_character = ai_character
-	reacting_character = player_character
+	#set_position.emit(ai_character, player_character, Position_Manager.Position.STANDING)
+	_set_acting_reacting()
 	active_phase = Phases.ACTION
 	
-func action_phase ():
-	print("Current stamina", player_character.current_stamina)
+func action_phase () -> void:
 	process_phase = false
 	
-	if acting_character.is_player:
-		update_action_buttons.emit()
-		round_action = await action_selected
-		
-	else:
-		ai_decide_action()
-		
-	process_phase = true
-	active_phase = Phases.REACTION
+	#round_action = acting_character.decide_action()
+	
+	print("Decided Action (GM): ", round_action)
+	
+	#active_phase = Phases.REACTION
+	#process_phase = true
 
-func reaction_phase ():
+func reaction_phase () -> void:
 	process_phase = false
-	if reacting_character.is_player:
-		update_reaction_buttons.emit(round_action)
-		
-		round_reaction = await reaction_selected
-	else:
-		ai_decide_reaction()
-		
+	
+	reacting_character.decide_reaction(round_action)
+	
 	process_phase = true
 	active_phase = Phases.COMPARE
 	
-func decide_action_or_reaction_step():
+func decide_action_or_reaction_step() -> void:
 	process_phase = false
 	var action_score : int
 	var reaction_score : int
@@ -118,24 +115,24 @@ func decide_action_or_reaction_step():
 	process_phase = true
 	active_phase = Phases.PROCESS
 	
-func process_step():
+func process_step() -> void:
 	process_phase = false
 	process_move.emit(source_character, target_character, winning_move)
 	process_phase = true
 	active_phase = Phases.END_STEP
 	
-func end_step():
+func end_step() -> void:
 	
 	process_phase = false
 	
-	if player_character.current_hp <= 0 and ai_character.current_hp <=0:
+	if player_1.current_hp <= 0 and player_2.current_hp <=0:
 		game_over = true
-	elif player_character.current_hp <= 0:
+	elif player_1.current_hp <= 0:
 		game_over = true
-		winner = ai_character
-	elif ai_character.current_hp <= 0:
+		winner = player_2
+	elif player_2.current_hp <= 0:
 		game_over = true
-		winner = player_character
+		winner = player_1
 		
 	round_action = null
 	round_reaction = null
@@ -153,45 +150,24 @@ func end_step():
 		return
 	else:
 		
-		var coin_flip : int = randi_range(1,2)
-	
-		if coin_flip == 1:
-			acting_character = player_character
-			reacting_character = ai_character
-		else:
-			acting_character = ai_character
-			reacting_character = player_character
-		
+		_set_acting_reacting()
 		process_phase = true
 		active_phase = Phases.ACTION
 		
-func ai_decide_action ():
-	round_action = ai_character.known_actions[0]
-	print(round_action)
 	
-func ai_decide_reaction ():
-	round_reaction = ai_character.known_reactions[0]
-	print(round_reaction.name)
+func _flip_coin() -> int:
+	return randi_range(1,2)
 	
-func initiative_check():
-	var pc_initiative = 0
-	var ai_initiative = 0
-	var highest_initiative
-	var lowest_initiative
-	
-	while (pc_initiative == ai_initiative) :
-		pc_initiative = player_character.roll_initiative()
-		ai_initiative = ai_character.roll_initiative()
+func _pick_character() -> Abstract_Character:
+	if _flip_coin() == 1:
+		return player_1
+	else:
+		return player_2
 		
-		if (pc_initiative > ai_initiative) :
-			highest_initiative = player_character
-			lowest_initiative = ai_character
-			
-		if (pc_initiative < ai_initiative) :
-			highest_initiative = ai_character
-			lowest_initiative = player_character
-			
-	acting_character = highest_initiative
-	reacting_character = lowest_initiative
-	
-	
+func _set_acting_reacting() -> void:
+	if _flip_coin() == 1:
+		acting_character = player_1
+		reacting_character = player_2
+	else:
+		acting_character = player_2
+		reacting_character = player_1

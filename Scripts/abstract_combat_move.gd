@@ -7,6 +7,8 @@ extends Resource
 
 @export var description : String
 
+@export var weight : int
+
 @export var valid_positions : Dictionary[PositionManager.Position, int]
 
 @export var tags : Dictionary[Enums.TagType, int]

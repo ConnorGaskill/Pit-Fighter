@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="Reaction" format=3 uid="uid://wae836ccnkq5"]
 
-[ext_resource type="Script" uid="uid://c7e1lgebbqhba" path="res://Scripts/reaction.gd" id="1_7bhht"]
-[ext_resource type="Script" uid="uid://d4b08o6ocqt3a" path="res://Scripts/action.gd" id="1_jdq2n"]
+[ext_resource type="Script" uid="uid://d4b08o6ocqt3a" path="res://Scripts/action.gd" id="1_of4tq"]
+[ext_resource type="Script" uid="uid://c7e1lgebbqhba" path="res://Scripts/reaction.gd" id="2_jdq2n"]
 
 [resource]
-script = ExtResource("1_7bhht")
+script = ExtResource("2_jdq2n")
 name = "Dodge"
 valid_positions = Dictionary[int, int]({
 0: 3

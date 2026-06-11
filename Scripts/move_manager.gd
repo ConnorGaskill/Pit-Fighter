@@ -2,9 +2,9 @@ extends Node
 
 func _ready() -> void:
 
-	GameManager.process_move.connect(use_move)
+	GameManager.Instance.process_move.connect(use_move)
 
-func apply_move(move : Abstract_Combat_Move, target : Character) -> void:
+func apply_move(move : Abstract_Combat_Move, target : Abstract_Character) -> void:
 	print("Processed move: " + move.name)
 	var damage_on_stack : int = 0
 	
@@ -24,7 +24,7 @@ func apply_move(move : Abstract_Combat_Move, target : Character) -> void:
 	#GameManager.process_phase.emit(true)
 	return
 
-func use_move(source : Character, target : Character, move : Abstract_Combat_Move):
+func use_move(source : Abstract_Character, target : Abstract_Character, move : Abstract_Combat_Move) -> void:
 	if move.tags.has(Enums.TagType.STAMINA_COST):
 		source.change_stamina(0 - move.tags[Enums.TagType.STAMINA_COST])
 		

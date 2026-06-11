@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Move_Package" format=3 uid="uid://b5pwgqrw1drkp"]
+
+[ext_resource type="Script" uid="uid://c3a8lbr2ntahs" path="res://Scripts/weighted_action.gd" id="1_uscev"]
+[ext_resource type="Script" uid="uid://its8otreu5nt" path="res://Scripts/weighted_reaction.gd" id="2_0hkvm"]
+[ext_resource type="Resource" uid="uid://ba1ludsp3kpm2" path="res://Weighted Moves/Weighted Actions/Default/standard_jab.tres" id="2_v7re4"]
+[ext_resource type="Script" uid="uid://2rq74fkmjl1l" path="res://Scripts/move_package.gd" id="3_5es5w"]
+[ext_resource type="Resource" uid="uid://bb2dgirgru6vv" path="res://Weighted Moves/Weighted Actions/Default/standard_uppercut.tres" id="3_h3ded"]
+[ext_resource type="Resource" uid="uid://5k0t1g3k4iim" path="res://Weighted Moves/Weighted Reactions/Default/standard_counter_cross.tres" id="5_k6ubg"]
+[ext_resource type="Resource" uid="uid://nyfnkc8c6qys" path="res://Weighted Moves/Weighted Reactions/Default/standard_dodge.tres" id="6_jruh8"]
+
+[resource]
+script = ExtResource("3_5es5w")
+actions = Array[ExtResource("1_uscev")]([ExtResource("2_v7re4"), ExtResource("3_h3ded")])
+reactions = Array[ExtResource("2_0hkvm")]([ExtResource("5_k6ubg"), ExtResource("6_jruh8")])
+metadata/_custom_type_script = "uid://2rq74fkmjl1l"

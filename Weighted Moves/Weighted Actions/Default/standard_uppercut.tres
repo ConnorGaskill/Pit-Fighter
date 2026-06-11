@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Weighted_Action" format=3 uid="uid://bb2dgirgru6vv"]
+
+[ext_resource type="Resource" uid="uid://b4k1sa6l5l7go" path="res://Actions/uppercut.tres" id="1_62qku"]
+[ext_resource type="Script" uid="uid://c3a8lbr2ntahs" path="res://Scripts/weighted_action.gd" id="1_tqsta"]
+
+[resource]
+script = ExtResource("1_tqsta")
+action = ExtResource("1_62qku")
+metadata/_custom_type_script = "uid://c3a8lbr2ntahs"

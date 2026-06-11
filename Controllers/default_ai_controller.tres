@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AI_Controller" format=3 uid="uid://dwy167wlwif62"]
+
+[ext_resource type="Script" uid="uid://2rq74fkmjl1l" path="res://Scripts/move_package.gd" id="1_ka8iu"]
+[ext_resource type="Script" uid="uid://bxn7qpmxu0js7" path="res://Scripts/Controller Scripts/ai_controller.gd" id="2_46jh5"]
+[ext_resource type="Resource" uid="uid://b5pwgqrw1drkp" path="res://Move Packages/test_package.tres" id="2_64tma"]
+
+[resource]
+script = ExtResource("2_46jh5")
+name = "ai controller"
+move_packages = Array[ExtResource("1_ka8iu")]([ExtResource("2_64tma")])
+metadata/_custom_type_script = "uid://bxn7qpmxu0js7"

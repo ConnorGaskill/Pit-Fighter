@@ -1,12 +1,10 @@
 [gd_resource type="Resource" script_class="Action" format=3 uid="uid://nb1q3v4lgg5h"]
 
-[ext_resource type="Script" uid="uid://d4b08o6ocqt3a" path="res://Scripts/action.gd" id="1_0e4ym"]
-[ext_resource type="Script" uid="uid://c7e1lgebbqhba" path="res://Scripts/reaction.gd" id="1_5jguc"]
-[ext_resource type="Resource" uid="uid://wae836ccnkq5" path="res://Reactions/dodge.tres" id="2_p3otw"]
+[ext_resource type="Script" uid="uid://c7e1lgebbqhba" path="res://Scripts/reaction.gd" id="1_0tdnc"]
+[ext_resource type="Script" uid="uid://d4b08o6ocqt3a" path="res://Scripts/action.gd" id="2_5jguc"]
 
 [resource]
-script = ExtResource("1_0e4ym")
-related_moves = Array[ExtResource("1_5jguc")]([ExtResource("2_p3otw")])
+script = ExtResource("2_5jguc")
 name = "Jab"
 valid_positions = Dictionary[int, int]({
 0: 3

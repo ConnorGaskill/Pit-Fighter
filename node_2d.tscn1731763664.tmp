@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://mxqovvc7ou02"]
 
 [ext_resource type="Script" uid="uid://b02eo6e0h5y45" path="res://Scripts/game_manager.gd" id="1_0e48y"]
-[ext_resource type="Script" uid="uid://cjb6kt3mi85xs" path="res://Scripts/Character Scripts/player_character.gd" id="2_d21ai"]
+[ext_resource type="Script" uid="uid://cjb6kt3mi85xs" path="res://Scripts/Character Scripts/player_character.gd" id="2_0h7mo"]
 [ext_resource type="Resource" uid="uid://cirypcpcf5dbl" path="res://Controllers/default_player_controller.tres" id="3_rj586"]
-[ext_resource type="Texture2D" uid="uid://470akxdyu6kh" path="res://Textures/place_holder.tres" id="4_4d7sh"]
-[ext_resource type="Script" uid="uid://bi8lmhefmn737" path="res://Scripts/Character Scripts/ai_character.gd" id="5_ir8iy"]
-[ext_resource type="Resource" uid="uid://dwy167wlwif62" path="res://Controllers/default_ai_controller.tres" id="6_rj586"]
+[ext_resource type="Script" uid="uid://bi8lmhefmn737" path="res://Scripts/Character Scripts/ai_character.gd" id="4_kdubu"]
+[ext_resource type="Resource" uid="uid://b5pwgqrw1drkp" path="res://Move Packages/test_package.tres" id="6_rj586"]
 [ext_resource type="Script" uid="uid://hhpw7p8ntyal" path="res://Scripts/health_bar.gd" id="7_d21ai"]
+[ext_resource type="Texture2D" uid="uid://470akxdyu6kh" path="res://Textures/place_holder.tres" id="9_x0ka3"]
 [ext_resource type="Script" uid="uid://brs6q2jbkh46l" path="res://Scripts/stamina_bar.gd" id="10_ir8iy"]
 
 [sub_resource type="Animation" id="Animation_4d7sh"]
@@ -28,25 +28,25 @@ script = ExtResource("1_0e48y")
 [node name="Player_1" type="Node2D" parent="." unique_id=301074550]
 unique_name_in_owner = true
 position = Vector2(100, 0)
-script = ExtResource("2_d21ai")
+script = ExtResource("2_0h7mo")
 controller = ExtResource("3_rj586")
 max_hp = 10
 current_hp = 10
 max_stamina = 10
 current_stamina = 10
-character_name = "Player"
-sprite_texture = ExtResource("4_4d7sh")
+character_name = "Test"
+sprite_texture = ExtResource("9_x0ka3")
 
 [node name="Player_2" type="Node2D" parent="." unique_id=1231225469]
 unique_name_in_owner = true
 position = Vector2(1000, 0)
-script = ExtResource("5_ir8iy")
+script = ExtResource("4_kdubu")
 controller = ExtResource("6_rj586")
-max_hp = 10
 current_hp = 10
 max_stamina = 10
 current_stamina = 10
-sprite_texture = ExtResource("4_4d7sh")
+character_name = "Bozo"
+sprite_texture = ExtResource("9_x0ka3")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1319885309]
 

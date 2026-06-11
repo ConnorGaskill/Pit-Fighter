@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Player_Controller" format=3 uid="uid://cirypcpcf5dbl"]
+
+[ext_resource type="Script" uid="uid://2rq74fkmjl1l" path="res://Scripts/move_package.gd" id="1_jlww3"]
+[ext_resource type="Resource" uid="uid://b5pwgqrw1drkp" path="res://Move Packages/test_package.tres" id="2_4bnpl"]
+[ext_resource type="Script" uid="uid://dsue0yx1h1fts" path="res://Scripts/Controller Scripts/player_controller.gd" id="2_iav6g"]
+
+[resource]
+script = ExtResource("2_iav6g")
+name = "default player controller"
+move_packages = Array[ExtResource("1_jlww3")]([ExtResource("2_4bnpl")])
+metadata/_custom_type_script = "uid://dsue0yx1h1fts"

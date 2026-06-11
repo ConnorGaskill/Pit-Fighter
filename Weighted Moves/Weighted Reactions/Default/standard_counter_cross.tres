@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Weighted_Reaction" format=3 uid="uid://5k0t1g3k4iim"]
+
+[ext_resource type="Script" uid="uid://its8otreu5nt" path="res://Scripts/weighted_reaction.gd" id="1_7ghoc"]
+[ext_resource type="Resource" uid="uid://cj6y6cy8lg5p6" path="res://Reactions/counter_cross.tres" id="1_bar8s"]
+
+[resource]
+script = ExtResource("1_7ghoc")
+reaction = ExtResource("1_bar8s")
+metadata/_custom_type_script = "uid://its8otreu5nt"

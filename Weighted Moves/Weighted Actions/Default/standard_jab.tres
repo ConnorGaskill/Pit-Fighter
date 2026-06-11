@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Weighted_Action" format=3 uid="uid://ba1ludsp3kpm2"]
+
+[ext_resource type="Resource" uid="uid://nb1q3v4lgg5h" path="res://Actions/jab.tres" id="1_2e53u"]
+[ext_resource type="Script" uid="uid://c3a8lbr2ntahs" path="res://Scripts/weighted_action.gd" id="1_fkdae"]
+
+[resource]
+script = ExtResource("1_fkdae")
+action = ExtResource("1_2e53u")
+metadata/_custom_type_script = "uid://c3a8lbr2ntahs"

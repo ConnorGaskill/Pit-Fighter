@@ -9,9 +9,9 @@ enum Position {
 	TIE
 }
 
-var a : Character
+var a : Abstract_Character
 
-var b : Character
+var b : Abstract_Character
 
 static var _current_position : Position
 
@@ -19,10 +19,10 @@ static var current_position : Position :
 	get: 
 		return _current_position
 
-func _ready() -> void:
-	GameManager.set_position.connect(set_position)
+#func _ready() -> void:
+	#GameManager.set_position.connect(set_position)
 
-func set_position (a : Character, b : Character, position : Position):
+func set_position (a : Abstract_Character, b : Abstract_Character, position : Position) -> void:
 	if position == Position.STANDING or position == Position.TIE:
 		self.a = null
 		self.b = null
