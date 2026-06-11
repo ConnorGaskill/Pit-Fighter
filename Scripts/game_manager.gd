@@ -3,6 +3,9 @@ class_name GameManager extends Node2D
 signal process_move(source_character : Abstract_Character, target_character : Abstract_Character, 
 winning_move : Abstract_Combat_Move)
 
+signal action_selected(action : Action)
+signal reaction_selected(reaction : Reaction)
+
 @onready var player_1 : Abstract_Character = %Player_1
 
 @onready var player_2 : Abstract_Character = %Player_2
@@ -76,21 +79,27 @@ func start() -> void:
 func action_phase () -> void:
 	process_phase = false
 	
-	#round_action = acting_character.decide_action()
-	
 	print("Decided Action (GM): ", round_action)
 	
-	#active_phase = Phases.REACTION
-	#process_phase = true
+	acting_character.decide_action()
+	
+	round_action = await action_selected
+	
+	active_phase = Phases.REACTION
+	
+	process_phase = true
 
 func reaction_phase () -> void:
 	process_phase = false
 	
+	reaction_selected.connect(func(move : Reaction) -> void:
+		process_phase = true
+		round_reaction = move
+		print("Reaction Has Been Selected ", round_reaction.name)
+		active_phase = Phases.COMPARE)
+	
 	reacting_character.decide_reaction(round_action)
-	
-	process_phase = true
-	active_phase = Phases.COMPARE
-	
+
 func decide_action_or_reaction_step() -> void:
 	process_phase = false
 	var action_score : int
@@ -165,7 +174,7 @@ func _pick_character() -> Abstract_Character:
 		return player_2
 		
 func _set_acting_reacting() -> void:
-	if _flip_coin() == 1:
+	if 1 == 1:
 		acting_character = player_1
 		reacting_character = player_2
 	else:

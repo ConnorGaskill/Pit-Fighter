@@ -4,9 +4,6 @@ class_name CombatButtonManager
 
 var assigned_player : Player_Character
 
-func _ready() -> void:
-	pass
-
 func decide_move(moves : Dictionary[Abstract_Combat_Move, bool]) -> void:
 	show_buttons(moves)
 

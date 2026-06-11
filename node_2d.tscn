@@ -46,6 +46,7 @@ max_hp = 10
 current_hp = 10
 max_stamina = 10
 current_stamina = 10
+character_name = "Bozo"
 sprite_texture = ExtResource("4_4d7sh")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1319885309]

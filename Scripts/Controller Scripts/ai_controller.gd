@@ -30,5 +30,11 @@ func decide_reaction(action : Action) -> void:
 			else:
 				possible_choices[rm] = known_reactions[rm] + roll_variance()
 
+	
+	#print(possible_choices.find_key(
+		#possible_choices.values().max()))
+
 	assigned_character.send_move(possible_choices.find_key(
 		possible_choices.values().max()))
+	
+	#assert(false, "Wa")

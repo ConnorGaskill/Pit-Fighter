@@ -41,9 +41,17 @@ func _ready() -> void:
 	
 func send_move(move : Abstract_Combat_Move) -> void:
 	if move is Action:
-		GameManager.Instance.round_action.emit(move)
+		#GameManager.Instance.round_action = move
+		print("OwO ", move.name)
+		GameManager.Instance.action_selected.emit(move as Action)
+	
 	if move is Reaction:
-		GameManager.Instance.round_reaction.emit(move)
+		
+		print("uwu ",move.name)
+		#GameManager.Instance.round_reaction = move
+		GameManager.Instance.reaction_selected.emit(move as Reaction)
+	
+	#print("Send Move Type: ", ProjectSettings.get_global_class_list())
 
 	
 func decide_action() -> void:
