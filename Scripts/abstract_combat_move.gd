@@ -12,3 +12,5 @@ extends Resource
 @export var valid_positions : Dictionary[PositionManager.Position, int]
 
 @export var tags : Dictionary[Enums.TagType, int]
+
+@export var prepare_text : String = name + " you."

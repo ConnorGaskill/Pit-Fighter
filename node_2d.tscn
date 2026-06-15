@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bi8lmhefmn737" path="res://Scripts/Character Scripts/ai_character.gd" id="5_ir8iy"]
 [ext_resource type="Resource" uid="uid://dwy167wlwif62" path="res://Controllers/default_ai_controller.tres" id="6_rj586"]
 [ext_resource type="Script" uid="uid://hhpw7p8ntyal" path="res://Scripts/health_bar.gd" id="7_d21ai"]
+[ext_resource type="Script" uid="uid://tarlxw26xffo" path="res://Scripts/restwart.gd" id="9_4d7sh"]
 [ext_resource type="Script" uid="uid://brs6q2jbkh46l" path="res://Scripts/stamina_bar.gd" id="10_ir8iy"]
 
 [sub_resource type="Animation" id="Animation_4d7sh"]
@@ -110,6 +111,21 @@ offset_bottom = 447.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/Log" unique_id=277231271]
 layout_mode = 2
+
+[node name="Restwart" type="Button" parent="CanvasLayer/Control" unique_id=755200593]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -39.0
+offset_top = -31.0
+offset_right = 39.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Restwart"
+script = ExtResource("9_4d7sh")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1937888393]
 libraries/ = SubResource("AnimationLibrary_hqns4")

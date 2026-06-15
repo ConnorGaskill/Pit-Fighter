@@ -12,3 +12,9 @@ enum RelatedMove {
 	DODGE,
 	UPPERCUT
 }
+
+enum Attribute {
+	STRENGTH,
+	DEXTERITY,
+	FOCUS
+}

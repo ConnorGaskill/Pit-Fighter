@@ -24,7 +24,6 @@ func show_buttons(moves : Dictionary[Abstract_Combat_Move, bool]) -> void:
 		button.pressed.connect(
 			func() -> void:
 				clear_buttons()
-				print("Move selected: ", move.name)		
 				assigned_player.send_move(move))
 
 func clear_buttons() -> void:

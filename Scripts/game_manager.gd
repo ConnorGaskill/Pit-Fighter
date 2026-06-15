@@ -32,6 +32,20 @@ var target_character : Abstract_Character
 
 var source_character : Abstract_Character
 
+
+var reaction_caller : Callable = func(move : Reaction) -> void:
+	process_phase = true
+	round_reaction = move
+	print("Reaction Has Been Selected ", round_reaction.name)
+	active_phase = Phases.COMPARE
+
+
+var action_caller : Callable = func(move : Action) -> void:
+	process_phase = true
+	round_action = move
+	print("Action Has Been Selected ", round_action.name)
+	active_phase = Phases.REACTION
+
 static var Instance : GameManager
 
 enum Phases {
@@ -79,24 +93,17 @@ func start() -> void:
 func action_phase () -> void:
 	process_phase = false
 	
-	print("Decided Action (GM): ", round_action)
-	
+	if !action_selected.is_connected(action_caller):
+		action_selected.connect(action_caller)
+		
 	acting_character.decide_action()
-	
-	round_action = await action_selected
-	
-	active_phase = Phases.REACTION
-	
-	process_phase = true
 
 func reaction_phase () -> void:
 	process_phase = false
 	
-	reaction_selected.connect(func(move : Reaction) -> void:
-		process_phase = true
-		round_reaction = move
-		print("Reaction Has Been Selected ", round_reaction.name)
-		active_phase = Phases.COMPARE)
+	
+	if !reaction_selected.is_connected(reaction_caller):
+		reaction_selected.connect(reaction_caller)
 	
 	reacting_character.decide_reaction(round_action)
 
@@ -162,7 +169,6 @@ func end_step() -> void:
 		_set_acting_reacting()
 		process_phase = true
 		active_phase = Phases.ACTION
-		
 	
 func _flip_coin() -> int:
 	return randi_range(1,2)
@@ -174,7 +180,7 @@ func _pick_character() -> Abstract_Character:
 		return player_2
 		
 func _set_acting_reacting() -> void:
-	if 1 == 1:
+	if _flip_coin() == 1:
 		acting_character = player_1
 		reacting_character = player_2
 	else:

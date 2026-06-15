@@ -29,6 +29,12 @@ var sprite : Sprite2D
 
 @export var sprite_texture : GradientTexture2D
 
+@export var attributes : Dictionary[Enums.Attribute, int] = {
+	Enums.Attribute.STRENGTH : 1,
+	Enums.Attribute.DEXTERITY : 1,
+	Enums.Attribute.FOCUS : 1
+}
+
 func roll_initiative() -> int:
 	return randf_range(0, 20)
 	
@@ -41,19 +47,13 @@ func _ready() -> void:
 	
 func send_move(move : Abstract_Combat_Move) -> void:
 	if move is Action:
-		#GameManager.Instance.round_action = move
-		print("OwO ", move.name)
+
 		GameManager.Instance.action_selected.emit(move as Action)
 	
 	if move is Reaction:
-		
-		print("uwu ",move.name)
-		#GameManager.Instance.round_reaction = move
-		GameManager.Instance.reaction_selected.emit(move as Reaction)
-	
-	#print("Send Move Type: ", ProjectSettings.get_global_class_list())
 
-	
+		GameManager.Instance.reaction_selected.emit(move as Reaction)
+		
 func decide_action() -> void:
 	pass
 	
